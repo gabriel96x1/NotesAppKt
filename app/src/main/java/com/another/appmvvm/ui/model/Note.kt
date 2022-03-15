@@ -16,16 +16,15 @@
 
 package com.another.appmvvm.ui.model
 
-import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlinx.android.parcel.Parcelize
 
-@Parcelize
 @Entity
 data class Note(
-  @PrimaryKey(autoGenerate = true) val id: Long,
   val title: String,
   val noteText: String,
+){
+  @PrimaryKey(autoGenerate = true)
+  var id : Int = 0
 
-) : Parcelable
+}

@@ -27,10 +27,10 @@ import com.another.appmvvm.ui.model.Note
 interface NotesDao {
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  fun insertNote(note: LiveData<Note>)
+  fun insertNote(note: Note)
 
   @Query("SELECT * FROM Note WHERE id = :id ")
-  fun getNote(id : Long)
+  fun getNote(id : Int) : LiveData<Note>
 
 
   @Query("SELECT * FROM Note")
