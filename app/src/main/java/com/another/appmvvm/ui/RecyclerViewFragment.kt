@@ -8,12 +8,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.another.appmvvm.R
-import com.another.appmvvm.databinding.ActivityMainBinding
 import com.another.appmvvm.databinding.FragmentRecyclerViewBinding
 import com.another.appmvvm.ui.adapter.CustomRecyclerViewAdapter
 import com.another.appmvvm.ui.model.Note
-import kotlinx.android.synthetic.main.fragment_recycler_view.*
 
 class RecyclerViewFragment : Fragment() {
 
@@ -39,6 +36,7 @@ class RecyclerViewFragment : Fragment() {
 
         _binding = FragmentRecyclerViewBinding.inflate(inflater, container, false)
         val view = _binding!!.root
+        val binding = _binding
 
         vm = ViewModelProvider(this)[MainActivityViewModel::class.java]
 
@@ -51,7 +49,7 @@ class RecyclerViewFragment : Fragment() {
 
         vm.showAllNotes().observe(viewLifecycleOwner, notesObserver)
 
-        recycler.adapter = CustomRecyclerViewAdapter(notesInfo)
+        binding!!.recycler.adapter = CustomRecyclerViewAdapter(notesInfo)
 
         return view
     }

@@ -16,24 +16,19 @@
 
 package com.another.appmvvm.ui.repository
 
-import android.app.Application
-import androidx.lifecycle.LiveData
-import com.another.appmvvm.ui.database.AppDatabase
 import com.another.appmvvm.ui.database.NotesDao
 import com.another.appmvvm.ui.model.Note
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class Repository constructor(
-  application: Application,
+@Singleton
+class Repository @Inject constructor(private val notesDao: NotesDao,
 ){
 
-  private val db : AppDatabase = AppDatabase.getAppDataBase(application)!!
-  private val notesDao = db.notesDao()
-
-
-  fun setNote(note : LiveData<Note>) = notesDao.insertNote(note)
+  fun setNote(note : Note) = notesDao.insertNote(note)
 
   fun getAllNotes() = notesDao.getNotesList()
 
-  fun getOneNote(id: Long) = notesDao.getNote(id)
+  fun getOneNote(id: Int) = notesDao.getNote(id)
 
 }

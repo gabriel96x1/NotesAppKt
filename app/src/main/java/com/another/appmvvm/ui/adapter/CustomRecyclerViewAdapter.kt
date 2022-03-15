@@ -9,7 +9,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.another.appmvvm.R
 import com.another.appmvvm.ui.model.Note
-import kotlinx.android.synthetic.main.item_layout.view.*
 
 
 class CustomRecyclerViewAdapter(private val dataSet: List<Note>) :
@@ -21,8 +20,8 @@ class CustomRecyclerViewAdapter(private val dataSet: List<Note>) :
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        var title: TextView = view.title
-        var note: TextView = view.note_body
+        var title: TextView = view.findViewById(R.id.title)
+        var note: TextView = view.findViewById(R.id.note_body)
 
         init {
             // Define click listener for the ViewHolder's View.

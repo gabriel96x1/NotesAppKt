@@ -11,15 +11,20 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding : ActivityMainBinding
     lateinit var vm : MainActivityViewModel
+    lateinit var ma : MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        vm = ViewModelProvider(this)[MainActivityViewModel::class.java]
+        vm = ViewModelProvider
+
 
         with(binding){
+
+            supportFragmentManager.beginTransaction().replace(R.id.fragmentContainerView, RecyclerViewFragment()).commit()
+
             floatingActionButton.setOnClickListener {
                 supportFragmentManager.beginTransaction().replace(R.id.fragmentContainerView, EditNoteFragment()).commit()
             }

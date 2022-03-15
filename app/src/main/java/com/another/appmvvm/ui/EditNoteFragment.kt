@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.another.appmvvm.R
@@ -24,7 +26,6 @@ class EditNoteFragment : Fragment() {
     lateinit var vm : MainActivityViewModel
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,9 +33,23 @@ class EditNoteFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentEditNoteBinding.inflate(inflater, container, false)
         val view = _binding!!.root
+        val binding = _binding
 
         vm = ViewModelProvider(this)[MainActivityViewModel::class.java]
 
+        binding!!.button.setOnClickListener {
+
+            val newNote = Note(binding.title.text.toString(), binding.body.text.toString())
+
+
+            vm.setNewNote(newNote)
+
+
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction!!.replace(R.id.fragmentContainerView, RecyclerViewFragment())
+            transaction.disallowAddToBackStack()
+            transaction.commit()
+        }
 
         return view
     }
