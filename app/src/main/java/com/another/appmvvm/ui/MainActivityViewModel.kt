@@ -27,7 +27,7 @@ class MainActivityViewModel(
         repository.getAllNotes()
     }
 
-    fun getOneNotes(id : Long){
+    fun getOneNote(id : Long){
         repository.getOneNote(id)
     }
 

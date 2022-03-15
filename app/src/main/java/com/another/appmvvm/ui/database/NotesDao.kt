@@ -30,7 +30,7 @@ interface NotesDao {
   fun insertNote(note: LiveData<Note>)
 
   @Query("SELECT * FROM Note WHERE id = :id ")
-  fun getNote(id : Long)
+  fun getNote(id : Long) : LiveData<Note>
 
 
   @Query("SELECT * FROM Note")

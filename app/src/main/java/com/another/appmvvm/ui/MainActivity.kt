@@ -21,9 +21,10 @@ class MainActivity : AppCompatActivity() {
 
         with(binding){
             floatingActionButton.setOnClickListener {
-
+                supportFragmentManager.beginTransaction().replace(R.id.fragmentContainerView, EditNoteFragment()).commit()
             }
         }
 
     }
 }
+
