@@ -16,13 +16,32 @@
 
 package com.another.appmvvm.ui.database
 
+import android.content.Context
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.another.appmvvm.ui.model.Note
-import com.skydoves.disneymotions.persistence.NotesDao
 
 @Database(entities = [Note::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
   abstract fun notesDao(): NotesDao
+
+  companion object {
+    var INSTANCE: AppDatabase? = null
+
+    fun getAppDataBase(context: Context): AppDatabase? {
+      if (INSTANCE == null){
+        synchronized(AppDatabase::class){
+          INSTANCE = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "note_db").build()
+        }
+      }
+      return INSTANCE
+    }
+
+    fun destroyDataBase(){
+      INSTANCE = null
+    }
+  }
+
 }

@@ -16,13 +16,19 @@
 
 package com.another.appmvvm.ui.repository
 
+import android.app.Application
 import androidx.lifecycle.LiveData
+import com.another.appmvvm.ui.database.AppDatabase
+import com.another.appmvvm.ui.database.NotesDao
 import com.another.appmvvm.ui.model.Note
-import com.skydoves.disneymotions.persistence.NotesDao
 
 class Repository constructor(
-  private val notesDao: NotesDao
+  application: Application,
 ){
+
+  private val db : AppDatabase = AppDatabase.getAppDataBase(application)!!
+  private val notesDao = db.notesDao()
+
 
   fun setNote(note : LiveData<Note>) = notesDao.insertNote(note)
 

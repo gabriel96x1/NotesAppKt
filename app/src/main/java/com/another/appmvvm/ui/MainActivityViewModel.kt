@@ -1,5 +1,6 @@
 package com.another.appmvvm.ui
 
+import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,8 +8,9 @@ import com.another.appmvvm.ui.model.Note
 import com.another.appmvvm.ui.repository.Repository
 
 class MainActivityViewModel(
-    private val repository: Repository
+    private val repository: Repository,
 ) : ViewModel() {
+
 
     lateinit var currentNote :MutableLiveData<Note>
     lateinit var allNotes : MutableLiveData<List<Note>>

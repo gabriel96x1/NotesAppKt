@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.skydoves.disneymotions.persistence
+package com.another.appmvvm.ui.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
