@@ -11,4 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_margin="15dp"
+        android:layout_gravity="end|bottom"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_launcher_foreground"
+        tools:layout_editor_absoluteY="624dp" />
+
 </FrameLayout>

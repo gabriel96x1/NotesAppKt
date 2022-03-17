@@ -7,13 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.another.appmvvm.R
 import com.another.appmvvm.databinding.FragmentEditNoteBinding
 import com.another.appmvvm.databinding.FragmentRecyclerViewBinding
 import com.another.appmvvm.ui.model.Note
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.internal.Contexts.getApplication
 
+@AndroidEntryPoint
 class EditNoteFragment : Fragment() {
 
 
@@ -23,8 +29,7 @@ class EditNoteFragment : Fragment() {
     }
 
     private var _binding: FragmentEditNoteBinding? = null
-    lateinit var vm : MainActivityViewModel
-
+    val sharedViewModel : MainActivityViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,26 +38,26 @@ class EditNoteFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentEditNoteBinding.inflate(inflater, container, false)
         val view = _binding!!.root
-        val binding = _binding
 
-        vm = ViewModelProvider(this)[MainActivityViewModel::class.java]
-
-        binding!!.button.setOnClickListener {
-
-            val newNote = Note(binding.title.text.toString(), binding.body.text.toString())
-
-
-            vm.setNewNote(newNote)
-
-
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction!!.replace(R.id.fragmentContainerView, RecyclerViewFragment())
-            transaction.disallowAddToBackStack()
-            transaction.commit()
-        }
 
         return view
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val binding = _binding
+
+        binding!!.button.setOnClickListener {
+
+            //val newNote = Note(binding.title.text.toString(), binding.body.text.toString())
+            //vm.setNewNote(newNote)
+
+            Navigation.findNavController(view).navigate(R.id.action_editNoteFragment_to_recyclerViewFragment)
+
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
