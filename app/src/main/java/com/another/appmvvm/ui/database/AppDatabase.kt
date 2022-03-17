@@ -22,26 +22,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.another.appmvvm.ui.model.Note
 
-@Database(entities = [Note::class], version = 1, exportSchema = false)
+@Database(entities = arrayOf(Note::class), version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
   abstract fun notesDao(): NotesDao
-
-  companion object {
-    var INSTANCE: AppDatabase? = null
-
-    fun getAppDataBase(context: Context): AppDatabase? {
-      if (INSTANCE == null){
-        synchronized(AppDatabase::class){
-          INSTANCE = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "note_db").build()
-        }
-      }
-      return INSTANCE
-    }
-
-    fun destroyDataBase(){
-      INSTANCE = null
-    }
-  }
 
 }

@@ -1,19 +1,21 @@
 package com.another.appmvvm.ui
 
 import androidx.lifecycle.*
+import com.another.appmvvm.ui.database.NotesDao
 import com.another.appmvvm.ui.model.Note
 import com.another.appmvvm.ui.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainActivityViewModel @Inject constructor(
-    private val repository: Repository,
-) : ViewModel() {
-
+class MainActivityViewModel @Inject constructor( val repository: Repository) : ViewModel() {
 
     lateinit var currentNote :MutableLiveData<Note>
-    lateinit var allNotes : MutableLiveData<List<Note>>
+    var allNotes : LiveData<List<Note>>
+
+    init {
+        allNotes = repository.getAllNotes()
+    }
 
     fun showAllNotes() : LiveData<List<Note>>{
         return allNotes
@@ -24,20 +26,20 @@ class MainActivityViewModel @Inject constructor(
     }
 
     fun getAllNotes(){
+
         repository.getAllNotes()
     }
 
-    fun getOneNote(id : Int){
+    suspend fun getOneNote(id : Int){
         repository.getOneNote(id)
     }
 
-    fun setNewNote(note : Note){
+    suspend fun setNewNote(note : Note){
         repository.setNote(note)
     }
 
     fun toEditNote(){
 
     }
-
 
 }
